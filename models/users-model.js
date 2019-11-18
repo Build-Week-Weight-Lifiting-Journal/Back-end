@@ -5,6 +5,7 @@ module.exports = {
     getById,
     getByUsername,
     findByUsername,
+    findByEmail,
     add
 };
 
@@ -36,6 +37,14 @@ function findByUsername(username) {
         .where({ username })
         .first();
 };
+
+// This is for authentication purposes only
+// DO NOT provide access to client
+function findByEmail(email) {
+    return db('users')
+        .where({ email })
+        .first();
+}
 
 function add(user) {
     return db('users')
