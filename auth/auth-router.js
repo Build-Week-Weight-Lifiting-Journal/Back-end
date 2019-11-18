@@ -33,7 +33,7 @@ router.post("/login", (req, res) => {
     const validationResult = validateUser(req.body, req.path);
 
     if (validationResult.isSuccessful) {
-        Users.getByUsername(username)
+        Users.findByUsername(username)
         .then(user => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);

@@ -1,13 +1,13 @@
 const Users = require("../models/users-model");
 
 module.exports = (req, res, next) => {
-    Users.getById(req.params.id)
+    Users.getByUsername(req.params.username)
     .then(user => {
         if (user) {
-            req.userId = user;
+            req.user = user;
             next();
         } else {
-            res.status(400).json({ message: `A user was not found with that id: ${req.params.id}.` });
+            res.status(400).json({ message: `A user was not found with a username of: ${req.params.username}.` });
         }
     })
     .catch(err => {
