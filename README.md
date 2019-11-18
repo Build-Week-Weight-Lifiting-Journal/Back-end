@@ -7,10 +7,18 @@
 ### Table of Contents
 Endpoints that do _**not**_ require authentication (Not Protected):
 
-| Links           | Endpoints          |
+| Requests           | Endpoints          |
 |-----------------|--------------------|
 |POST Registration| /api/auth/register |
 |POST Login       | /api/auth/login    |
+
+Endpoints that **_DO_** require authentication (Protected):
+
+| Requests            | Endpoints                     |
+|-----------------    | --------------------          |
+|GET Users            | /api/users                    |
+|GET User By ID       | /api/users/:id                |
+|GET User By Username | /api/users/getby/:username    |
 
 <hr />
 
