@@ -4,10 +4,10 @@ const bcrypt = require("bcryptjs");
 const Users = require("../models/users-model");
 const validateUser = require("./validateUser");
 const generateToken = require("./generateToken");
-const checkIfUserExists = require("../middleware/checkIfUserExists-middleware");
+const checkIfUsernameIsTaken = require("../middleware/checkIfUsernameIsTaken-middleware");
 
 // POST - Register a user
-router.post("/register", checkIfUserExists, (req, res) => {
+router.post("/register", checkIfUsernameIsTaken, (req, res) => {
     const user = req.body;
     const validationResult = validateUser(user, req.path);
     
@@ -33,7 +33,7 @@ router.post("/login", (req, res) => {
     const validationResult = validateUser(req.body, req.path);
 
     if (validationResult.isSuccessful) {
-        Users.getByUsername(username)
+        Users.findByUsername(username)
         .then(user => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);

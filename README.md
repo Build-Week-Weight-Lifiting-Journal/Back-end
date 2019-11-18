@@ -17,10 +17,13 @@ Endpoints that do _**not**_ require authentication (Not Protected):
 ## [POST] Registration
 URL: https://weight-lift-journal.herokuapp.com/api/auth/registration
 
-### What needs to be sent: 
-**Required Information**: `username` && `password`.
+### Request body should include: 
+| Input (Case Sensitive)           | Input Type          |
+|-----------------|--------------------|
+|name (required)           | string (4+ characters) |
+|password (required)       | string (4+ characters)    |
 
-_**Note**_: Username must be longer than 4+ characters. Password must be 8+ characters. 
+_An example of how the body should appear:_
 
 ```js
 {
@@ -47,8 +50,13 @@ _**Note**_: Username must be longer than 4+ characters. Password must be 8+ char
 ## [POST] Log In
 URL: https://weight-lift-journal.herokuapp.com/api/auth/login
 
-### What needs to be sent: 
-**Required Information**: `username` && `password`.
+### Request body should include: 
+| Input (Case Sensitive)           | Input Type          |
+|-----------------|--------------------|
+|name (required)           | string (4+ characters) |
+|password (required)       | string (4+ characters)    |
+
+_An example of how the body should appear:_
 
 ```js
 {
@@ -67,5 +75,84 @@ URL: https://weight-lift-journal.herokuapp.com/api/auth/login
 
 <hr />
 
+## [GET] Users
+URL: https://weight-lift-journal.herokuapp.com/api/users
+
+### What will be returned:
+_An array of all users within the database._
+```js
+[
+  {
+    "id": 1,
+    "username": "test",
+    "created_at": "2019-11-18T15:35:00.800Z",
+    "updated_at": "2019-11-18T15:35:00.800Z"
+  },
+  {
+    "id": 2,
+    "username": "clifford",
+    "created_at": "2019-11-18T15:35:00.800Z",
+    "updated_at": "2019-11-18T15:35:00.800Z"
+  },
+  {
+    "id": 3,
+    "username": "testuser",
+    "created_at": "2019-11-18T15:56:55.695Z",
+    "updated_at": "2019-11-18T15:56:55.695Z"
+  },
+  {
+    "id": 4,
+    "username": "yeeehaww",
+    "created_at": "2019-11-18T16:06:19.693Z",
+    "updated_at": "2019-11-18T16:06:19.693Z"
+  },
+  {
+    "id": 5,
+    "username": "exampleuser",
+    "created_at": "2019-11-18T16:09:18.017Z",
+    "updated_at": "2019-11-18T16:09:18.017Z"
+  }
+]
+```
+
+<hr />
+
+## [GET] User by ID
+URL: https://weight-lift-journal.herokuapp.com/api/users/:id
+
+**NOTE:** Be sure to include the `id` of an existing user on the end of the endpoint.
+
+### What will be returned:
+_An object of the user information._
+
+```js
+{
+  "id": 1,
+  "username": "test",
+  "created_at": "2019-11-18T15:35:00.800Z",
+  "updated_at": "2019-11-18T15:35:00.800Z"
+}
+```
+
+<hr />
+
+## [GET] User by Username
+URL: https://weight-lift-journal.herokuapp.com/api/users/getby/:username
+
+**NOTE:** Be sure to include the `username` of an existing user on the end of the endpoint.
+
+### What will be returned:
+_An object of the user information._
+
+```js
+{
+  "id": 1,
+  "username": "test",
+  "created_at": "2019-11-18T15:35:00.800Z",
+  "updated_at": "2019-11-18T15:35:00.800Z"
+}
+```
+
+<hr />
 
 

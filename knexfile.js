@@ -1,11 +1,9 @@
-require("dotenv").config();
-
 module.exports = {
 
   development: {
     client: "pg",
     connection: {
-      host: "127.0.0.1",
+      host: "localhost",
       database: process.env.DB_DEV_DATABASE,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD
