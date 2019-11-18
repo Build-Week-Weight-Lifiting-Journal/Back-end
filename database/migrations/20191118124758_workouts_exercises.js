@@ -3,8 +3,8 @@ exports.up = function(knex) {
   return knex.schema.createTable('workouts_exercises', tbl => {
       tbl.increments();
 
-      tbl.int('reps');
-      tbl.int('sets');
+      tbl.integer('reps');
+      tbl.integer('sets');
 
       tbl.integer('workout_id')
         .unsigned()
