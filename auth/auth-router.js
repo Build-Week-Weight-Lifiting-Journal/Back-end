@@ -21,7 +21,7 @@ router.post("/register", checkIfUserExists, (req, res) => {
         .catch(err => res.status(500).json({ error: "The server encountered an error while registering the user." }));
     } else {
         res.status(400).json({
-            message: "Invalid credentials, please refer to errors",
+            message: "Invalid credentials, please view list of errors.",
             errors: validationResult.errors
         });
     };
@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
         .catch(err => res.status(500).json({ error: "The server encountered an error while logging in." }));
     } else {
         res.status(400).json({
-            message: "Invalid credentials, please refer to errors.",
+            message: "Invalid credentials, please view list of errors.",
             errors: validationResult.errors
         });
     };
