@@ -9,5 +9,5 @@ module.exports = (req, res, next) => {
             res.status(400).json({ message: "That username is already taken." })
         }
     })
-    .catch(err => res.status(500).json({ message: "oops"}))
+    .catch(err => res.status(500).json({ message: "The server encountered an issue while registering. Please try again later." }))
 }
