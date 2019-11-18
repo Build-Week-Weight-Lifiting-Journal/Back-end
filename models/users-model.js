@@ -6,7 +6,8 @@ module.exports = {
     getByUsername,
     findByUsername,
     findByEmail,
-    add
+    add,
+    addWorkout
 };
 
 function get() {
@@ -51,3 +52,9 @@ function add(user) {
         .insert(user, 'id')
         .then(([id]) => getById(id));
 };
+
+function addWorkout(workout, user_id){
+    return db('workouts')
+            .insert(workout)
+            .where('users.id', '=', user_id)
+}
