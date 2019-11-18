@@ -30,13 +30,15 @@ URL: https://weight-lift-journal.herokuapp.com/api/auth/registration
 |-----------------|--------------------|
 |name (required)           | string (4+ characters) |
 |password (required)       | string (4+ characters)    |
+|email (required)       | string     |
 
 _An example of how the body should appear:_
 
 ```js
 {
 	"username": "exampleuser",
-	"password": "exampleuser"
+    "password": "exampleuser",
+    "email": "exampleuser@gmail.com"
 }
 ```
 
@@ -46,6 +48,7 @@ _An example of how the body should appear:_
   "user": {
     "id": 5,
     "username": "exampleuser",
+    "email": "exampleuser@gmail.com",
     "created_at": "2019-11-18T16:09:18.017Z",
     "updated_at": "2019-11-18T16:09:18.017Z"
   },
@@ -93,30 +96,35 @@ _An array of all users within the database._
   {
     "id": 1,
     "username": "test",
+    "email": "test@gmail.com",
     "created_at": "2019-11-18T15:35:00.800Z",
     "updated_at": "2019-11-18T15:35:00.800Z"
   },
   {
     "id": 2,
     "username": "clifford",
+    "email": "clifford@gmail.com",
     "created_at": "2019-11-18T15:35:00.800Z",
     "updated_at": "2019-11-18T15:35:00.800Z"
   },
   {
     "id": 3,
     "username": "testuser",
+    "email": "testuser@gmail.com",
     "created_at": "2019-11-18T15:56:55.695Z",
     "updated_at": "2019-11-18T15:56:55.695Z"
   },
   {
     "id": 4,
     "username": "yeeehaww",
+    "email": "yeehaww@gmail.com",
     "created_at": "2019-11-18T16:06:19.693Z",
     "updated_at": "2019-11-18T16:06:19.693Z"
   },
   {
     "id": 5,
     "username": "exampleuser",
+    "email": "exampleuser@gmail.com",
     "created_at": "2019-11-18T16:09:18.017Z",
     "updated_at": "2019-11-18T16:09:18.017Z"
   }
@@ -137,6 +145,7 @@ _An object of the user information._
 {
   "id": 1,
   "username": "test",
+  "email": "test@gmail.com",
   "created_at": "2019-11-18T15:35:00.800Z",
   "updated_at": "2019-11-18T15:35:00.800Z"
 }
@@ -156,6 +165,7 @@ _An object of the user information._
 {
   "id": 1,
   "username": "test",
+  "email": "test@gmail.com",
   "created_at": "2019-11-18T15:35:00.800Z",
   "updated_at": "2019-11-18T15:35:00.800Z"
 }
