@@ -12,4 +12,6 @@ middlewareConfig(server);
 // Endpoints / Routes funneled through 'api-router.js'
 server.use("/api", apiRouter);
 
+server.get("/", (req, res) => res.send("Weight Lifting Journal!"))
+
 module.exports = server;
