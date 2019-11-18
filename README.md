@@ -17,10 +17,13 @@ Endpoints that do _**not**_ require authentication (Not Protected):
 ## [POST] Registration
 URL: https://weight-lift-journal.herokuapp.com/api/auth/registration
 
-### What needs to be sent: 
-**Required Information**: `username` && `password`.
+### Request body should include: 
+| Input (Case Sensitive)           | Input Type          |
+|-----------------|--------------------|
+|name (required)           | string (4+ characters) |
+|password (required)       | string (4+ characters)    |
 
-_**Note**_: Username must be longer than 4+ characters. Password must be 8+ characters. 
+_An example of how the body should appear:_
 
 ```js
 {
@@ -47,8 +50,13 @@ _**Note**_: Username must be longer than 4+ characters. Password must be 8+ char
 ## [POST] Log In
 URL: https://weight-lift-journal.herokuapp.com/api/auth/login
 
-### What needs to be sent: 
-**Required Information**: `username` && `password`.
+### Request body should include: 
+| Input (Case Sensitive)           | Input Type          |
+|-----------------|--------------------|
+|name (required)           | string (4+ characters) |
+|password (required)       | string (4+ characters)    |
+
+_An example of how the body should appear:_
 
 ```js
 {
