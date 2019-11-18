@@ -2,12 +2,7 @@ module.exports = {
 
   development: {
     client: "pg",
-    connection: {
-      host: "localhost",
-      database: process.env.DB_DEV_DATABASE,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
-    },
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations"
