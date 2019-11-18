@@ -6,6 +6,9 @@ exports.up = function(knex) {
             .unique()
             .notNullable();
         tbl.string('password', 128).notNullable();
+        tbl.string('email', 320)
+            .unique()
+            .notNullable();
 
         tbl.timestamps(true, true);
     });
