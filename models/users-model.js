@@ -10,12 +10,12 @@ module.exports = {
 
 function get() {
     return db('users')
-        .select('id', 'username', 'created_at', 'updated_at');
+        .select('id', 'username', 'email', 'created_at', 'updated_at');
 };
 
 function getById(id) {
     return db('users')
-        .select('id', 'username', 'created_at', 'updated_at')
+        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ id })
         .first();
 };
@@ -24,7 +24,7 @@ function getById(id) {
 // that is used by the client
 function getByUsername(username) {
     return db('users')
-        .select('id', 'username', 'created_at', 'updated_at')
+        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ username })
         .first();
 };
