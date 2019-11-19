@@ -51,5 +51,32 @@ router.post('/:id/exercises', (req, res) => {
 
 });
 
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Workouts.remove(id)
+            .then(workout => {
+                res.status(200).json({message: 'The selected workout was removed'})
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({error: 'the workout could not be removed'})
+            })
+});
+
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+
+    Workouts.edit(changes, id)
+            .then(workout => {
+                res.status(200).json(workout)
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({error: 'the server could not edit the workout'})
+            })
+});
+
 
 module.exports = router;
