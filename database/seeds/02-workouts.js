@@ -2,9 +2,9 @@
 exports.seed = function(knex) {
   // Deletes ALL existing entries
  
-      return knex('table_name').insert([
-        {id: 1, name: 'rowValue1', duser_id: 1},
-        {id: 2, name: 'rowValue2', duser_id: 2},
-        {id: 3, name: 'rowValue3', duser_id: 3}
+      return knex('workouts').insert([
+        {name: 'stronk', date: null, user_id: 1},
+        {name: 'muscle', date: null, user_id: 2},
+        {name: 'big', date: null, user_id: 3}
       ]);
 };
