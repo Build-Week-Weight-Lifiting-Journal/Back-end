@@ -5,6 +5,8 @@ module.exports = {
     findById,
     findAll,
     findUserWorkouts,
+    remove,
+    edit
 };
 
 // Add an exercise to a workout
@@ -121,3 +123,17 @@ async function findUserWorkouts(user_id) {
 
     return await workoutList;
 };
+
+function remove(id) {
+    return db('workouts')
+            .where({id})
+            .first()
+            .del()
+}
+
+function edit(changes, id) {
+    return db('workouts')
+            .where({id})
+            .first()
+            .update(changes)
+}
