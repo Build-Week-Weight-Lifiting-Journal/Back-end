@@ -24,6 +24,18 @@ router.put('/:workout_id/exercises/:id', (req, res) => {
             console.log(err);
             res.status(500).json({ error: "the server failed to update the exercise" })
         })
+});
+
+router.delete('/exercises/:id', (req, res) => {
+    const { id } = req.params;
+    WorkoutExercises.remove(id)
+        .then(exercise => {
+            res.status(200).json({message: 'The exercise was successfully removed from the workout'})
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: "The server failed to remove the exercise from the workout" })
+        })
 })
 
 

@@ -2,7 +2,8 @@ const db = require("../config/db-config");
 
 module.exports = {
     get,
-    editExercise
+    editExercise,
+    remove
 }
 
 function get() {
@@ -40,4 +41,11 @@ async function editExercise(workoutData, workout_id, user_exercise_id) {
         })
         .where({id: user_exercise_id})   
     }
+};
+
+function remove(id) {
+    return db('workouts_exercises')
+            .where({id})
+            .first()
+            .del()
 }
