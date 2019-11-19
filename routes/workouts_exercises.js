@@ -11,6 +11,19 @@ router.get('/', (req, res) => {
         .catch(err => {
             res.status(500).json({ error: 'the server failed to retrieve all workouts'})
         })
+});
+
+router.put('/:workout_id/exercises/:id', (req, res) => {
+    const workoutData = req.body;
+    const { workout_id, id } = req.params;
+    WorkoutExercises.editExercise(workoutData, workout_id, id)
+        .then(exercise => {
+            res.status(200).json(exercise)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: "the server failed to update the exercise" })
+        })
 })
 
 
