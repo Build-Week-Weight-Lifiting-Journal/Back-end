@@ -179,7 +179,7 @@ _An array of all users within the database._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users/:id
+URL: https://weight-lift-journal.herokuapp.com/api/users/getby/:id
 
 **NOTE:** Be sure to include the `id` of an existing user on the end of the endpoint.
 

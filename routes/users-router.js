@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 
 const Users = require("../models/users-model");
+const { jwtSecret } = require("../config/secrets-config");
 const Workouts = require("../models/workouts-model");
 const validateUserId = require("../middleware/validateUserId-middleware");
 const validateUsername = require("../middleware/validateUsername-middleware");
@@ -74,5 +76,21 @@ router.post('/:id/workouts', validateUserId, (req, res) => {
     .then(work => res.status(201).json(work)) 
     .catch(err => res.status(500).json({ error: "The server failed to add a workout." }));
 })
+
+// GET - current user profile 
+router.get("/profile", (req, res) => {
+    const token = req.headers.authorization;
+    if (token) {
+        jwt.verify(token, jwtSecret, (err, decodedToken) => {
+            if (err) {
+                res.status(403).json({ error: "The token provided is invalid." })
+            } else {
+                Users.getById(decodedToken.id)
+                .then(user => res.status(200).json(user))
+                .catch(err => res.status(500).json({ error: "The server failed to retrieve that user." }));
+            }
+        })
+    }
+});
 
 module.exports = router;
