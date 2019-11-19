@@ -12,7 +12,7 @@ exports.up = function(knex) {
         .references('id')
         .inTable('workouts')
         .onUpdate('CASCADE')
-        .onDelete('RESTRICT');
+        .onDelete('CASCADE');
 
       tbl.integer('exercise_id')
         .unsigned()
@@ -20,7 +20,7 @@ exports.up = function(knex) {
         .references('id')
         .inTable('exercises')
         .onUpdate('CASCADE')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
   })
 };
 
