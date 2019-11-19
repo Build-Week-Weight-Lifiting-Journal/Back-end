@@ -36,7 +36,7 @@ _An example of how the body should appear:_
 
 ```js
 {
-	"username": "exampleuser",
+    "username": "exampleuser",
     "password": "exampleuser",
     "email": "exampleuser@gmail.com"
 }

@@ -5,7 +5,9 @@ module.exports = {
     getById,
     getByUsername,
     findByUsername,
-    add
+    findByEmail,
+    add,
+    addWorkout
 };
 
 function get() {
@@ -37,8 +39,21 @@ function findByUsername(username) {
         .first();
 };
 
+// This is for authentication purposes only
+// DO NOT provide access to client
+function findByEmail(email) {
+    return db('users')
+        .where({ email })
+        .first();
+}
+
 function add(user) {
     return db('users')
         .insert(user, 'id')
         .then(([id]) => getById(id));
 };
+
+function addWorkout(workout){
+    return db('workouts')
+            .insert(workout);
+}
