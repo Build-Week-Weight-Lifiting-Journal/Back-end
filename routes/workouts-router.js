@@ -1,10 +1,9 @@
-const express = require('express');
+const router = require('express').Router();
 
 const Workouts = require('../models/workouts-model');
 
-const router = express.Router();
-
-router.get('/workouts', (req, res) => {
+// GET - all workouts
+router.get('/', (req, res) => {
     Workouts.findAll()
         .then(workouts => {
             res.status(200).json(workouts)
@@ -14,7 +13,8 @@ router.get('/workouts', (req, res) => {
         })
 })
 
-router.get('/:id/workouts/:id', (req, res) => {
+// GET - individual workout by ID
+router.get('/:id', (req, res) => {
     const { id } = req.params;
     Workouts.findById(id)
     .then(workout => {
@@ -25,7 +25,8 @@ router.get('/:id/workouts/:id', (req, res) => {
     })
 })
 
-router.post('/workouts/:id/exercises', (req, res) => {
+// POST - add an exercise to a workout
+router.post('/:id/exercises', (req, res) => {
     const workoutData = req.body;
     const { id } = req.params;
     Workouts.addExercise(workoutData, id)

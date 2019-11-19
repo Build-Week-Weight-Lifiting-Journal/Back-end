@@ -53,8 +53,7 @@ function add(user) {
         .then(([id]) => getById(id));
 };
 
-function addWorkout(workout, user_id){
+function addWorkout(workout){
     return db('workouts')
-            .insert(workout)
-            .where('users.id', '=', user_id)
+            .insert(workout);
 }

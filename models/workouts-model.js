@@ -3,15 +3,17 @@ const db = require('../config/db-config.js');
 module.exports = {
     addExercise,
     findById,
-    findAll
+    findAll,
+    findUserWorkouts,
 };
 
-function addExercise(workoutData, workout_id) {
+async function addExercise(workoutData, workout_id) {
     
-    const exercise = db('exercises')
-            .where({name: workoutData.name});
+    const exercise = await db('exercises')
+            .where({name: workoutData.name})
+            .first();
 
-    return db('workouts_exercises')
+    return await db('workouts_exercises')
             .insert({
                 reps: workoutData.reps || '',
                 sets: workoutData.sets || '',
@@ -20,13 +22,38 @@ function addExercise(workoutData, workout_id) {
              })
 };
 
-function findById(id){
-    return db('workouts')
-            .where({ id })
-            .first()
+function findById(workout_id){
+    return db('workouts_exercises as we')
+        .join("workouts as w", "we.workout_id", "w.id")
+        .join("users as u", "w.user_id", "u.id")
+        .join("exercises as e", 'we.exercise_id', 'e.id')
+        .select(
+            'w.id as workout_id', 
+            'w.name as workout_name', 
+            'e.name as exercise_name',
+            'e.region',
+            'we.reps',
+            'we.sets'
+            )
+        .where({ workout_id })
 };
 
 function findAll(){
     return db('workouts')
-}
+};
 
+function findUserWorkouts(user_id) {
+    return db('workouts as w')
+        .join('workouts_exercises as we', 'we.workout_id', 'w.id')
+        .join('users as u', 'w.user_id', 'u.id')
+        .join('exercises as e', 'we.exercise_id', 'e.id')
+        .groupBy('w.name')
+        .select(
+            'w.id',
+            'w.name as workout_name',
+            'u.username',
+            'u.id as user_id'
+            )
+        .count('e.id as exercises')
+        .where({ user_id });
+};

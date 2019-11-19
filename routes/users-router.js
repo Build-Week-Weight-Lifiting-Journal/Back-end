@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const Users = require("../models/users-model");
+const Workouts = require("../models/workouts-model");
 const validateUserId = require("../middleware/validateUserId-middleware");
 const validateUsername = require("../middleware/validateUsername-middleware");
 
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET - individual user by ID
-router.get("/:id", validateUserId, async (req, res) => {
+router.get("/getby/:id", validateUserId, async (req, res) => {
     try { 
         res.status(200).json(req.userId); 
     } 
@@ -36,17 +37,33 @@ router.get("/getby/:username", validateUsername, async (req, res) => {
     };
 });
 
+// GET - all workouts for a user
+router.get("/:id/workouts", (req, res) => {
+    Workouts.findUserWorkouts(req.params.id)
+    .then(workouts => res.status(200).json(workouts))
+    .catch(err => res.status(500).json({ error: "There was an issue while retrieving user's workouts." }));
+});
+
+// THIS DOES NOT MAKE SENSE
+// GET - a single workout for a user
+// router.get("/workouts/:id", (req, res) => {
+//     Workouts.findUserWorkoutById(req.params.user_id, req.params.id)
+//     .then(workout => res.status(200).json(workout))
+//     .catch(err => res.status(500).json({ error: "There was an issue while retrieving user's workouts." }));
+// });
+
+// POST - Add a workout to a user
 router.post('/:id/workouts', (req, res) => {
     const workoutData = req.body;
     const { id } = req.params;
 
-    Users.getById(id)
-    .then(workout => {
-        Users.addWorkout(workoutData, id)
-        .then(work => {
-            res.status(201).json(work)
-        }) 
+    Users.addWorkout({ 
+        ...workoutData,
+        user_id: id
     })
+    .then(work => {
+        res.status(201).json(work)
+    }) 
     .catch(err => {
         console.log(err);
         res.status(500).json({ error: "The server failed to add a workout"})
