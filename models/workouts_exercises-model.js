@@ -11,13 +11,14 @@ function get() {
 }
 
 async function editExercise(workoutData, workout_id, user_exercise_id) {
-    const { name, reps, sets, region } = workoutData
+    const { name, reps, sets, region } = workoutData;
+
     const exercise = await db('exercises')
             .where({name})
             .first();
 
     if(exercise) {
-        await db('workouts_exercises')
+       return await db('workouts_exercises')
             .update({
                 reps,
                 sets,
@@ -32,7 +33,7 @@ async function editExercise(workoutData, workout_id, user_exercise_id) {
             region
         });
 
-    await db('workouts_exercises')
+    return await db('workouts_exercises')
         .update({
             reps,
             sets,

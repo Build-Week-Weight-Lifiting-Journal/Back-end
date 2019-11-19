@@ -25,7 +25,6 @@ async function getById(id) {
         .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ id })
         .first();
-        console.log(user)
 
     // Returns all workouts specific to that user if they exist
     if (user) {
@@ -49,11 +48,33 @@ async function getById(id) {
 
 // This version of getting by username should be the version
 // that is used by the client
-function getByUsername(username) {
-    return db('users')
+async function getByUsername(username) {
+    let workouts = [];
+
+    // Retrieves the user by their username
+    const user = await db('users')
         .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ username })
         .first();
+
+    // Returns all workouts specific to that user if they exist
+    if (user) {
+        workouts = await db('workouts as w')
+            .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
+            .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
+            .groupBy('w.name')
+            .select(
+                'w.id',
+                'w.name as workout_name',
+                )
+            .count('e.id as exercises')
+            .where({ user_id: user.id });
+    
+        return await {
+            ...user,
+            workouts: workouts
+        };
+    }
 };
 
 // This version of finding by username returns the password

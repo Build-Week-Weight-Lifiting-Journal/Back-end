@@ -27,7 +27,7 @@ router.get("/getby/:id", validateUserId, async (req, res) => {
 });
 
 // GET - individual user by username
-router.get("/getby/:username", validateUsername, async (req, res) => {
+router.get("/getby/name/:username", validateUsername, async (req, res) => {
     try { 
         res.status(200).json(req.user); 
     } 
