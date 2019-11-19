@@ -57,7 +57,8 @@ async function findById(workout_id){
         .first();
 
     // Find the exercises associated with that workout 
-    const exercises = await db('workouts_exercises as we')
+    if (workout) {
+        const exercises = await db('workouts_exercises as we')
             .join("workouts as w", "we.workout_id", "w.id")
             .join("exercises as e", "we.exercise_id", "e.id")
             .select(
@@ -69,11 +70,12 @@ async function findById(workout_id){
                 "we.reps"
             )
             .where({ workout_id })
-
-    // Return an object containing the workout, and a list of the exercises
-    return {
-        ...workout,
-        exercises: exercises
+        
+        // Return an object containing the workout, and a list of the exercises
+        return {
+            ...workout,
+            exercises: exercises
+        }
     }
 };
 
