@@ -11,7 +11,7 @@ function addExercise(workoutData, workout_id) {
     const exercise = db('exercises')
             .where({name: workoutData.name});
 
-    return db('workouts-exercises')
+    return db('workouts_exercises')
             .insert({
                 reps: workoutData.reps || '',
                 sets: workoutData.sets || '',
