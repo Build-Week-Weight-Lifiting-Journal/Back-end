@@ -40,7 +40,13 @@ router.get("/getby/:username", validateUsername, async (req, res) => {
 // GET - all workouts for a user
 router.get("/:id/workouts", (req, res) => {
     Workouts.findUserWorkouts(req.params.id)
-    .then(workouts => res.status(200).json(workouts))
+    .then(workouts => {
+        if (workouts.length) {
+            res.status(200).json(workouts)
+        } else {
+            res.status(400).json({ message: "This user does not have any workouts." })
+        }
+    })
     .catch(err => res.status(500).json({ error: "There was an issue while retrieving user's workouts." }));
 });
 
