@@ -38,5 +38,4 @@ router.delete('/exercises/:id', (req, res) => {
         })
 })
 
-
 module.exports = router;

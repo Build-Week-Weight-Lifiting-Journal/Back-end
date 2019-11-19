@@ -25,6 +25,8 @@ Endpoints that **_DO_** require authentication (Protected):
 |<a href="#addWorkoutToUser">POST Add a workout to a user</a>      | /api/users/:id/workouts                   |
 |<a href="#allWorkouts">GET All workouts</a>                    | /api/workouts                             |
 |<a href="#workoutID">GET Workout by ID</a>                   | /api/workouts/:id                         |
+|<a href="#editWorkout">PUT Edit a workout</a>                   | /api/workouts/:id                         |
+|<a href="#deleteWorkout">DELETE Delete a workout</a>                   | /api/workouts/:id                         |
 |<a href="#addExercise">POST Add exercise to a workout</a>      | /api/workouts/:id/exercises               |
 |<a href="#editExercise">PUT Edit a workout's exercise</a>       | /api/workouts/:workout_id/exercises/:id   |
 |<a href="#deleteExercise">DELETE Delete a workout's exercise</a>  | /api/workouts/exercises/:id               |
@@ -57,6 +59,9 @@ _An example of how the body should appear:_
 ```
 
 ### What will be returned:
+
+_You will receive the user object an a JWT._
+
 ```js
 {
   "user": {
@@ -96,10 +101,21 @@ _An example of how the body should appear:_
 ```
 
 ### What will be returned:
+
+_You will receive the user object, and a JWT._
+
 ```js
 {
   "message": "Success! You are logged in!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTU3NDA5MzU0NSwiZXhwIjoxNTc0MTIyMzQ1fQ.VXyAdSorktX0HcG5kwOcz7g7VC7KRhmNr-muyYJQxOw"
+  "user": {
+    "id": 6,
+    "username": "testdude",
+    "email": "testdude@gmail.com",
+    "created_at": "2019-11-19 20:28:57",
+    "updated_at": "2019-11-19 20:28:57",
+    "workouts": []
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJ0ZXN0ZHVkZSIsImlhdCI6MTU3NDE5NTM4OSwiZXhwIjoxNTc0MjgxNzg5fQ.Cf3CLHMwKIy_IMMifdCeDmo6t8DQM5kOBnPuHTyx70w"
 }
 ```
 
@@ -451,6 +467,61 @@ _An object containing the workout information, and an array of ALL exercises ass
       "reps": 10
     }
   ]
+}
+```
+
+<hr />
+
+<div id="editWorkout"></div>
+
+## [PUT] Edit a workout
+
+<a href="#top">Return to the top</a>
+
+URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id
+
+**NOTE:** Be sure to include the `id` of an existing workout on the end of the endpoint.
+
+### Request body should include: 
+| Input (Case Sensitive)           | Input Type          |
+|-----------------|--------------------|
+|name (required)           | string |
+
+_An example of how the body should appear:_
+
+```js
+{
+	"name": "New Workout!"
+}
+```
+
+### What will be returned:
+
+_You will receive the number of records updated. You should expect to see `1` returned if successful._
+
+```js
+1
+```
+
+<hr />
+
+<div id="deleteWorkout"></div>
+
+## [DELETE] Delete a workout
+
+<a href="#top">Return to the top</a>
+
+URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id
+
+**NOTE:** Be sure to include the `id` of an existing workout on the end of the endpoint.
+
+### What will be returned:
+
+_You will receive a message confirming the workout was removed._
+
+```js
+{
+  "message": "The selected workout was removed"
 }
 ```
 
