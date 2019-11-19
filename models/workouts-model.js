@@ -17,8 +17,8 @@ async function addExercise(workoutData, workout_id) {
         // If exercises exists add it to the workout in the WE table
         await db('workouts_exercises')
             .insert({
-                reps: workoutData.reps || 0,
-                sets: workoutData.sets || 0,
+                reps: workoutData.reps,
+                sets: workoutData.sets,
                 workout_id: workout_id,
                 exercise_id: exercise.id
             })   
@@ -33,8 +33,8 @@ async function addExercise(workoutData, workout_id) {
 
         await db('workouts_exercises')
             .insert({
-                reps: workoutData.reps || 0,
-                sets: workoutData.sets || 0,
+                reps: workoutData.reps,
+                sets: workoutData.sets,
                 workout_id: workout_id,
                 exercise_id: id
             })   
@@ -59,6 +59,7 @@ async function findById(workout_id){
             .join("workouts as w", "we.workout_id", "w.id")
             .join("exercises as e", "we.exercise_id", "e.id")
             .select(
+                "we.id as user_exercise_id",
                 "e.id as exercise_id",
                 "e.name as exercise_name",
                 "e.region",
@@ -103,6 +104,7 @@ async function findUserWorkouts(user_id) {
         .join("workouts as w", "we.workout_id", "w.id")
         .join("exercises as e", "we.exercise_id", "e.id")
         .select(
+            "we.id as user_exercise_id",
             "e.id as exercise_id",
             "e.name as exercise_name",
             "e.region",

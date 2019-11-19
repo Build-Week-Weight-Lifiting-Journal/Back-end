@@ -59,21 +59,20 @@ router.get("/:id/workouts", (req, res) => {
 // });
 
 // POST - Add a workout to a user
-router.post('/:id/workouts', (req, res) => {
+router.post('/:id/workouts', validateUserId, (req, res) => {
     const workoutData = req.body;
     const { id } = req.params;
+
+    if (!workoutData.name) {
+        res.status(400).json({ message: "Please provide a name for this workout." });
+    }
 
     Users.addWorkout({ 
         ...workoutData,
         user_id: id
     })
-    .then(work => {
-        res.status(201).json(work)
-    }) 
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({ error: "The server failed to add a workout"})
-    })
+    .then(work => res.status(201).json(work)) 
+    .catch(err => res.status(500).json({ error: "The server failed to add a workout." }));
 })
 
 module.exports = router;
