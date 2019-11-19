@@ -10,17 +10,21 @@ module.exports = {
     addWorkout
 };
 
+// Get all users
 function get() {
     return db('users')
         .select('id', 'username', 'email', 'created_at', 'updated_at');
 };
 
+// Get an individual user by ID
 async function getById(id) {
+    // Retrieves the user by their ID
     const user = await db('users')
         .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ id })
         .first();
 
+    // Returns all workouts specific to that user
     const workouts = await db('workouts as w')
         .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
         .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
@@ -35,9 +39,7 @@ async function getById(id) {
         return {
             ...user,
             workouts: workouts
-        }
-
-
+        };
 };
 
 // This version of getting by username should be the version
@@ -65,12 +67,14 @@ function findByEmail(email) {
         .first();
 }
 
+// Add a user
 function add(user) {
     return db('users')
         .insert(user, 'id')
         .then(([id]) => getById(id));
 };
 
+// Add a workout to a user
 function addWorkout(workout){
     return db('workouts')
             .insert(workout);

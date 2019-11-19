@@ -9,24 +9,43 @@ module.exports = {
 
 // Add an exercise to a workout
 async function addExercise(workoutData, workout_id) {
-    
     const exercise = await db('exercises')
             .where({name: workoutData.name})
             .first();
-
-    await db('workouts_exercises')
+    
+    if (exercise) {
+        // If exercises exists add it to the workout in the WE table
+        await db('workouts_exercises')
             .insert({
-                reps: workoutData.reps || '',
-                sets: workoutData.sets || '',
+                reps: workoutData.reps || 0,
+                sets: workoutData.sets || 0,
                 workout_id: workout_id,
                 exercise_id: exercise.id
-             })
-    
+            })   
+    } else {
+        // if it doesn't exist, add it to the exercises table
+        // THEN add it to the WE table
+        const [ id ] = await db('exercises')
+            .insert({ 
+                name: workoutData.name,  
+                region: workoutData.region
+            });
+
+        await db('workouts_exercises')
+            .insert({
+                reps: workoutData.reps || 0,
+                sets: workoutData.sets || 0,
+                workout_id: workout_id,
+                exercise_id: id
+            })   
+    };
+                
     return await findById(workout_id);
 };
 
 // Find a workout by it's ID
 async function findById(workout_id){
+    // Find the workout associated with the workout ID
     const workout = await db('workouts as w')
         .select(
             'w.id as workout_id', 
@@ -34,31 +53,35 @@ async function findById(workout_id){
             )
         .where({ workout_id })
         .first();
-        console.log(workout)
-    
+
+    // Find the exercises associated with that workout 
     const exercises = await db('workouts_exercises as we')
             .join("workouts as w", "we.workout_id", "w.id")
             .join("exercises as e", "we.exercise_id", "e.id")
             .select(
                 "e.id as exercise_id",
                 "e.name as exercise_name",
+                "e.region",
                 "we.sets",
                 "we.reps"
             )
             .where({ workout_id })
 
+    // Return an object containing the workout, and a list of the exercises
     return {
         ...workout,
         exercises: exercises
     }
 };
 
+// Find ALL workouts that exist
 function findAll(){
     return db('workouts')
 };
 
 // Find ALL workouts associated with a user
 async function findUserWorkouts(user_id) {
+    // Get all workouts associated with a user ID
     const workouts = await db('workouts as w')
         .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
         .join('users as u', 'w.user_id', 'u.id')
@@ -72,13 +95,17 @@ async function findUserWorkouts(user_id) {
             )
         .where({ user_id });
 
-    const workoutList = await Promise.all(workouts.map( async workout => {
+    // An array of objects containing: workouts, and list of exercises for each workout
+    const workoutList = await Promise.all(workouts.map(async workout => {
+        // This is a list of exercises specific to the workout ID
+        // Which is added into the returned object
         let exercises = await db('workouts_exercises as we')
         .join("workouts as w", "we.workout_id", "w.id")
         .join("exercises as e", "we.exercise_id", "e.id")
         .select(
             "e.id as exercise_id",
             "e.name as exercise_name",
+            "e.region",
             "we.sets",
             "we.reps"
         )
