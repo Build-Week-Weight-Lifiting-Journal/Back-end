@@ -79,17 +79,12 @@ router.post('/:id/workouts', validateUserId, (req, res) => {
 
 // GET - current user profile 
 router.get("/profile", (req, res) => {
-    const token = req.headers.authorization;
-    if (token) {
-        jwt.verify(token, jwtSecret, (err, decodedToken) => {
-            if (err) {
-                res.status(403).json({ error: "The token provided is invalid." })
-            } else {
-                Users.getById(decodedToken.id)
-                .then(user => res.status(200).json(user))
-                .catch(err => res.status(500).json({ error: "The server failed to retrieve that user." }));
-            }
-        })
+    const user = req.userObj;
+
+    if (user) {
+        res.status(200).json(user);
+    } else {
+        res.status(404).json({ error: "There is currently not a user being used. Please ensure you have signed in and are using a JWT to keep track of the current user being used." })
     }
 });
 
