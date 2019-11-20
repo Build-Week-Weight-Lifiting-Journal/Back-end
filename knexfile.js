@@ -20,12 +20,9 @@ module.exports = {
   },
   
   testing: {
-    client: "pg",
+    client: 'sqlite3',
     connection: {
-      host: "localhost",
-      database: process.env.DB_TEST_DATABASE,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      filename: './database/tests-users.db3'
     },
     useNullAsDefault: true,
     migrations: {
@@ -35,9 +32,10 @@ module.exports = {
       directory: "./database/seeds"
     },
     pool: {
-      min: 2,
-      max: 10
-    }
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
+    },
   },
 
   production: {

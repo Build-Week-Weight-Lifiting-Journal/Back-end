@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 
 const Users = require("../models/users-model");
+const { jwtSecret } = require("../config/secrets-config");
 const Workouts = require("../models/workouts-model");
 const validateUserId = require("../middleware/validateUserId-middleware");
 const validateUsername = require("../middleware/validateUsername-middleware");
@@ -74,5 +76,16 @@ router.post('/:id/workouts', validateUserId, (req, res) => {
     .then(work => res.status(201).json(work)) 
     .catch(err => res.status(500).json({ error: "The server failed to add a workout." }));
 })
+
+// GET - current user profile 
+router.get("/profile", (req, res) => {
+    const user = req.userObj;
+
+    if (user) {
+        res.status(200).json(user);
+    } else {
+        res.status(404).json({ error: "There is currently not a user being used. Please ensure you have signed in and are using a JWT to keep track of the current user being used." })
+    }
+});
 
 module.exports = router;

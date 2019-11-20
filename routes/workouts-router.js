@@ -19,7 +19,11 @@ router.get('/:id', (req, res) => {
     const { id } = req.params;
     Workouts.findById(id)
     .then(workout => {
-        res.status(200).json(workout)
+        if (workout) {
+            res.status(200).json(workout)
+        } else {
+            res.status(404).json({ message: `The workout with id: ${id} does not exist.` })
+        }
     })
     .catch(err => {
         res.status(500).json({ error: "The server failed to retrieve the workout by id"})
