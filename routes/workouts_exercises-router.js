@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
         })
 });
 
+// PUT - edit an exercise that belongs to a workout
 router.put('/:workout_id/exercises/:id', (req, res) => {
     const workoutData = req.body;
     const { workout_id, id } = req.params;
@@ -26,6 +27,7 @@ router.put('/:workout_id/exercises/:id', (req, res) => {
         })
 });
 
+// DELETE - delete an exercise from a workout
 router.delete('/exercises/:id', (req, res) => {
     const { id } = req.params;
     WorkoutExercises.remove(id)
