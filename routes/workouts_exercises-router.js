@@ -19,7 +19,7 @@ router.put('/:workout_id/exercises/:id', (req, res) => {
     const { workout_id, id } = req.params;
     WorkoutExercises.editExercise(workoutData, workout_id, id)
         .then(exercise => {
-            res.status(200).json(exercise)
+            res.status(201).json(exercise)
         })
         .catch(err => {
             console.log(err);

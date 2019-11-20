@@ -14,10 +14,12 @@ describe("Auth Router Tests", () => {
     describe("POST /register", () => {
         it("returns 201 status code on successful registration and provides a jwt", async () => {
             const user = {
-                username: "testtest",
-                email: "test@gmail.com",
-                password: "testtest"
+                username: "exampletest",
+                email: "example@gmail.com",
+                password: "exampletest"
             };
+
+            await db('users').truncate();
 
             const res = await request(server)
                 .post("/api/auth/register")
@@ -29,16 +31,16 @@ describe("Auth Router Tests", () => {
 
         it("returns the created user from database", async () => {
             const user = {
-                username: "testtest",
-                email: "test@gmail.com",
-                password: "testtest"
+                username: "example",
+                email: "example@gmail.com",
+                password: "example"
             }
 
             const [ id ] = await db('users')
                 .insert(user);
             
             const newUser = await db('users').where({ id }).first();
-            await expect(newUser.username).toBe("testtest");
+            await expect(newUser.username).toBe("example");
             await expect(newUser.id).toBeDefined();
         });
 
@@ -60,21 +62,23 @@ describe("Auth Router Tests", () => {
     describe("POST /login", () => {
         it("returns status 200 on successful login and provides a jwt", async () => {
             const user = {
-                username: "testtest",
-                email: "test@gmail.com",
-                password: "testtest"
+                username: "exampletest",
+                email: "example@gmail.com",
+                password: "exampletest"
             }
 
             const hashedPassword = bcrypt.hashSync(user.password, 12);
             user.password = hashedPassword;
+
+            await db('users').truncate();
 
             await db('users').insert(user);
 
             const res = await request(server)
                 .post("/api/auth/login")
                 .send({
-                    username: "testtest",
-                    password: "testtest"
+                    username: "exampletest",
+                    password: "exampletest"
                 });
             await expect(res.status).toBe(200);
             await expect(res.body.token).toBeDefined();
@@ -82,9 +86,9 @@ describe("Auth Router Tests", () => {
 
         it("returns status 400 when given wrong credentials", async () => {
             const user = {
-                username: "testtest",
-                email: "test@gmail.com",
-                password: "testtest"
+                username: "example",
+                email: "example@gmail.com",
+                password: "example"
             }
 
             const hashedPassword = bcrypt.hashSync(user.password, 12);
@@ -95,17 +99,17 @@ describe("Auth Router Tests", () => {
             const res = await request(server)
                 .post("/api/auth/login")
                 .send({
-                    username: "testtest",
-                    password: "testtestss"
+                    username: "example",
+                    password: "examples"
                 });
             await expect(res.status).toBe(400);
         });
 
         it("returns status 400 when given a username that doesn't exist", async () => {
             const user = {
-                username: "testtest",
-                email: "test@gmail.com",
-                password: "testtest"
+                username: "example",
+                email: "example@gmail.com",
+                password: "example"
             }
 
             const hashedPassword = bcrypt.hashSync(user.password, 12);
@@ -117,7 +121,7 @@ describe("Auth Router Tests", () => {
                 .post("/api/auth/login")
                 .send({
                     username: "testexample",
-                    password: "testtest"
+                    password: "example"
                 });
             await expect(res.status).toBe(400);
         });
