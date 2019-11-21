@@ -18,7 +18,6 @@ describe("User Router Tests", () => {
     
     describe("GET /users", () => {
         it("returns status code 200", async () => {
-            
             const token = generateToken({ id: 1, username: "testuser" });
             
             const res = await request(server)   
