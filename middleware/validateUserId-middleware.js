@@ -1,5 +1,6 @@
 const Users = require("../models/users-model");
 
+// Verifies that the user ID provided exists within the database
 module.exports = (req, res, next) => {
     Users.getById(req.params.id)
     .then(user => {

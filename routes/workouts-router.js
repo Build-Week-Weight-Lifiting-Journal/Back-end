@@ -55,6 +55,7 @@ router.post('/:id/exercises', (req, res) => {
 
 });
 
+// DELETE - delete a workout by ID
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
 
@@ -68,6 +69,7 @@ router.delete('/:id', (req, res) => {
             })
 });
 
+// PUT - edit a workout by ID
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;

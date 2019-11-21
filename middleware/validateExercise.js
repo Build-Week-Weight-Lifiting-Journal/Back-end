@@ -1,3 +1,5 @@
+// Ensures that all column values of the table are being filled when
+// attempting to add an exercise to a workout
 module.exports = (exercise) => {
     const errors = [];
 

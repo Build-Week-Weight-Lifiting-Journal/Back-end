@@ -126,6 +126,7 @@ async function findUserWorkouts(user_id) {
     return await workoutList;
 };
 
+// Delete a workout
 function remove(id) {
     return db('workouts')
             .where({id})
@@ -133,6 +134,7 @@ function remove(id) {
             .del()
 }
 
+// Edit a workout's name
 function edit(changes, id) {
     return db('workouts')
             .where({id})

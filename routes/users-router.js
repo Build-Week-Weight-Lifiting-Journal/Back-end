@@ -52,14 +52,6 @@ router.get("/:id/workouts", (req, res) => {
     .catch(err => res.status(500).json({ error: "There was an issue while retrieving user's workouts." }));
 });
 
-// THIS DOES NOT MAKE SENSE
-// GET - a single workout for a user
-// router.get("/workouts/:id", (req, res) => {
-//     Workouts.findUserWorkoutById(req.params.user_id, req.params.id)
-//     .then(workout => res.status(200).json(workout))
-//     .catch(err => res.status(500).json({ error: "There was an issue while retrieving user's workouts." }));
-// });
-
 // POST - Add a workout to a user
 router.post('/:id/workouts', validateUserId, (req, res) => {
     const workoutData = req.body;

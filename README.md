@@ -3,7 +3,7 @@
 # Weight Lifting Journal - Back End
 
 ## API Documentation
-**BASE URL** https://weight-lift-journal.herokuapp.com/
+**BASE URL** https://weight-lift-journal-dev.herokuapp.com/
 - Attach endpoints to the end of the base URL in order to make HTTP Requests.
 
 ### Table of Contents
@@ -39,7 +39,7 @@ Endpoints that **_DO_** require authentication (Protected):
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/auth/registration
+URL: https://weight-lift-journal-dev.herokuapp.com/api/auth/registration
 
 ### Request body should include: 
 | Input (Case Sensitive)           | Input Type          |
@@ -83,7 +83,7 @@ _You will receive the user object an a JWT._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/auth/login
+URL: https://weight-lift-journal-dev.herokuapp.com/api/auth/login
 
 ### Request body should include: 
 | Input (Case Sensitive)           | Input Type          |
@@ -127,7 +127,7 @@ _You will receive the user object, and a JWT._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users
 
 ### What will be returned:
 _An array of all users within the database._
@@ -179,7 +179,7 @@ _An array of all users within the database._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users/getby/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users/getby/:id
 
 **NOTE:** Be sure to include the `id` of an existing user on the end of the endpoint.
 
@@ -221,7 +221,7 @@ _An object of the user information._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users/getby/name/:username
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users/getby/name/:username
 
 **NOTE:** Be sure to include the `username` of an existing user on the end of the endpoint.
 
@@ -263,7 +263,7 @@ _An object of the user information._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users/:id/workouts
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users/:id/workouts
 
 **NOTE:** Be sure to include the `id` of an existing user in the endpoint.
 
@@ -331,7 +331,7 @@ _An array containing objects of the workout information, and the user that it be
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/users/:id/workouts
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users/:id/workouts
 
 **NOTE:** Be sure to include the `id` of an existing user in the endpoint.
 
@@ -366,7 +366,7 @@ _You will receive an array containing the ID of the newly created workout._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts
 
 ### What will be returned:
 _An array containing objects of all the existing workouts, and the user's id that they belong to._
@@ -414,7 +414,7 @@ _An array containing objects of all the existing workouts, and the user's id tha
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/:id
 
 **NOTE:** Be sure to include the `id` of an existing user on the end of the endpoint.
 
@@ -478,7 +478,7 @@ _An object containing the workout information, and an array of ALL exercises ass
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/:id
 
 **NOTE:** Be sure to include the `id` of an existing workout on the end of the endpoint.
 
@@ -511,7 +511,7 @@ _You will receive the number of records updated. You should expect to see `1` re
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/:id
 
 **NOTE:** Be sure to include the `id` of an existing workout on the end of the endpoint.
 
@@ -533,7 +533,7 @@ _You will receive a message confirming the workout was removed._
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/:id/exercises
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/:id/exercises
 
 **NOTE:** Be sure to include the `id` of an existing workout in the endpoint.
 
@@ -611,7 +611,7 @@ _You will receive an object containing the workout's list of exercises which the
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/:workout_id/exercises/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/:workout_id/exercises/:id
 
 **NOTE:** Be sure to include the `id` of an existing WORKOUT, `workout_id`, in the endpoint.
 
@@ -652,7 +652,7 @@ _You will receive the number of records updated. You should expect to see `1` re
 
 <a href="#top">Return to the top</a>
 
-URL: https://weight-lift-journal.herokuapp.com/api/workouts/exercises/:id
+URL: https://weight-lift-journal-dev.herokuapp.com/api/workouts/exercises/:id
 
 **NOTE:** Be sure to include the `id` of an existing EXERCISE, `id`, at the end of the endpoint.
 

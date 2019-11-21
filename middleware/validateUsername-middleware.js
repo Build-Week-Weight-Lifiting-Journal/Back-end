@@ -1,5 +1,6 @@
 const Users = require("../models/users-model");
 
+// Verifies that the username provided exists within the database
 module.exports = (req, res, next) => {
     Users.getByUsername(req.params.username)
     .then(user => {

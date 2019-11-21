@@ -13,12 +13,13 @@ router.get('/', (req, res) => {
         })
 });
 
+// PUT - edit an exercise that belongs to a workout
 router.put('/:workout_id/exercises/:id', (req, res) => {
     const workoutData = req.body;
     const { workout_id, id } = req.params;
     WorkoutExercises.editExercise(workoutData, workout_id, id)
         .then(exercise => {
-            res.status(200).json(exercise)
+            res.status(201).json(exercise)
         })
         .catch(err => {
             console.log(err);
@@ -26,11 +27,12 @@ router.put('/:workout_id/exercises/:id', (req, res) => {
         })
 });
 
+// DELETE - delete an exercise from a workout
 router.delete('/exercises/:id', (req, res) => {
     const { id } = req.params;
     WorkoutExercises.remove(id)
         .then(exercise => {
-            res.status(200).json({message: 'The exercise was successfully removed from the workout'})
+            res.status(200).json({message: 'The exercise was successfully removed from the workout.'})
         })
         .catch(err => {
             console.log(err);
