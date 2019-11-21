@@ -1,8 +1,8 @@
 const request = require("supertest");
 
-const server = require("../api/server");
-const db = require("../config/db-config");
-const generateToken = require("../auth/generateToken");
+const server = require("../../api/server");
+const db = require("../../config/db-config");
+const generateToken = require("../../auth/generateToken");
 
 describe("User Router Tests", () => {
 

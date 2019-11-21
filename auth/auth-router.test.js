@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const server = require("../api/server");
 const db = require("../config/db-config");
-const validateUser = require("../auth/validateUser");
+const validateUser = require("./validateUser");
 
 describe("Auth Router Tests", () => {
 

@@ -32,7 +32,7 @@ router.delete('/exercises/:id', (req, res) => {
     const { id } = req.params;
     WorkoutExercises.remove(id)
         .then(exercise => {
-            res.status(200).json({message: 'The exercise was successfully removed from the workout'})
+            res.status(200).json({message: 'The exercise was successfully removed from the workout.'})
         })
         .catch(err => {
             console.log(err);

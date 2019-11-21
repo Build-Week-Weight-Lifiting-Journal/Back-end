@@ -1,6 +1,6 @@
-const db = require('../config/db-config.js');
+const db = require('../../config/db-config.js');
 
-const { edit, remove, findById, addExercise } = require("../models/workouts-model");
+const { edit, remove, findById, addExercise } = require("../workouts-model");
 
 describe("workouts-model", () => {
 

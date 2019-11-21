@@ -33,14 +33,14 @@ async function editExercise(workoutData, workout_id, user_exercise_id) {
             region
         });
 
-    return await db('workouts_exercises')
-        .update({
-            reps,
-            sets,
-            workout_id,
-            exercise_id: id
-        })
-        .where({id: user_exercise_id})   
+        return await db('workouts_exercises')
+            .update({
+                reps,
+                sets,
+                workout_id,
+                exercise_id: id
+            })
+            .where({id: user_exercise_id})   
     }
 };
 
