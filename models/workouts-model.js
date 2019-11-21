@@ -24,6 +24,7 @@ async function addExercise(workoutData, workout_id) {
                 workout_id: workout_id,
                 exercise_id: exercise.id
             })   
+            .returning('id');
     } else {
         // if it doesn't exist, add it to the exercises table
         // THEN add it to the WE table
@@ -31,7 +32,8 @@ async function addExercise(workoutData, workout_id) {
             .insert({ 
                 name: workoutData.name,  
                 region: workoutData.region
-            });
+            })
+            .returning('id');
 
         await db('workouts_exercises')
             .insert({
@@ -40,6 +42,7 @@ async function addExercise(workoutData, workout_id) {
                 workout_id: workout_id,
                 exercise_id: id
             })   
+            .returning('id');
     };
                 
     return await findById(workout_id);

@@ -96,12 +96,14 @@ function findByEmail(email) {
 // Add a user
 function add(user) {
     return db('users')
-        .insert(user, 'id')
+        .insert(user)
+        .returning('id')
         .then(([id]) => getById(id));
 };
 
 // Add a workout to a user
 function addWorkout(workout){
     return db('workouts')
-            .insert(workout);
+            .insert(workout)
+            .returning('id');
 }
