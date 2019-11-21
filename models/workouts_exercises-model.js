@@ -1,14 +1,8 @@
 const db = require("../config/db-config");
 
 module.exports = {
-    get,
     editExercise,
     remove
-}
-
-// Get all workouts and their associated exercises from the connecting third table
-function get() {
-    return db('workouts_exercises')
 }
 
 // Edit an exercise that belongs to a workout
@@ -39,7 +33,8 @@ async function editExercise(workoutData, workout_id, user_exercise_id) {
         .insert({ 
             name,  
             region
-        });
+        })
+        .returning('id');
 
         return await db('workouts_exercises')
             .update({
