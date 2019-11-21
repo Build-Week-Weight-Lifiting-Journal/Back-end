@@ -1,14 +1,8 @@
 const db = require("../config/db-config");
 
 module.exports = {
-    get,
     editExercise,
     remove
-}
-
-// Get all workouts and their associated exercises from the connecting third table
-function get() {
-    return db('workouts_exercises')
 }
 
 // Edit an exercise that belongs to a workout

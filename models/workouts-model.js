@@ -56,9 +56,10 @@ async function findById(workout_id){
             'w.id as workout_id', 
             'w.name as workout_name', 
             )
-        .where({ workout_id })
+        .where({ id: workout_id })
         .first();
 
+        await console.log(workout)
     // Find the exercises associated with that workout 
     if (workout) {
         const exercises = await db('workouts_exercises as we')
@@ -141,6 +142,5 @@ function remove(id) {
 function edit(changes, id) {
     return db('workouts')
             .where({id})
-            .first()
-            .update(changes)
+            .update(changes, 'id')
 }

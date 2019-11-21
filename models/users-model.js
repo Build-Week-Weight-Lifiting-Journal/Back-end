@@ -22,28 +22,26 @@ async function getById(id) {
 
     // Retrieves the user by their ID
     const user = await db('users')
-        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ id })
+        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .first();
 
-    // Returns all workouts specific to that user if they exist
-    if (user) {
-        workouts = await db('workouts as w')
-            .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
-            .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
-            .groupBy('w.name')
-            .select(
-                'w.id',
-                'w.name as workout_name',
-                )
-            .count('e.id as exercises')
-            .where({ user_id: id });
-    
-        return await {
-            ...user,
-            workouts: workouts
-        };
-    }
+// Returns all workouts specific to that user if they exist
+if (user) {
+    workouts = await db('workouts as w')
+        .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
+        .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
+        .select('w.id', 'w.name')
+        .where({ user_id: id })
+        .groupBy('w.id')
+        .count('e.id as exercises')
+
+        console.log("WORKOUTS HERE" , workouts)
+            return await {
+                ...user,
+                workouts: workouts
+            };
+        }
 };
 
 // This version of getting by username should be the version
@@ -53,8 +51,8 @@ async function getByUsername(username) {
 
     // Retrieves the user by their username
     const user = await db('users')
-        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .where({ username })
+        .select('id', 'username', 'email', 'created_at', 'updated_at')
         .first();
 
     // Returns all workouts specific to that user if they exist
@@ -63,10 +61,7 @@ async function getByUsername(username) {
             .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
             .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
             .groupBy('w.name')
-            .select(
-                'w.id',
-                'w.name as workout_name',
-                )
+            .select('w.name as workout_name')
             .count('e.id as exercises')
             .where({ user_id: user.id });
     
@@ -96,14 +91,12 @@ function findByEmail(email) {
 // Add a user
 function add(user) {
     return db('users')
-        .insert(user)
-        .returning('id')
+        .insert(user, 'id')
         .then(([id]) => getById(id));
 };
 
 // Add a workout to a user
 function addWorkout(workout){
     return db('workouts')
-            .insert(workout)
-            .returning('id');
+            .insert(workout, 'id');
 }
