@@ -8,6 +8,12 @@ describe("workouts-model", () => {
         await db('workouts').truncate();
         await db('exercises').truncate();
         await db('workouts_exercises').truncate();
+        await db('users').truncate();
+        await db('users').insert({
+            username: "thisisatest",
+            email: "thisisatest@gmail.com",
+            password: "thisisatest"
+        })
         await db('workouts').insert({
             name: 'stronk',
             user_id: 1
