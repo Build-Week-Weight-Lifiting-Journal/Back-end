@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config/secrets-config");
 const Users = require("../models/users-model");
 
+// If a token is provided, and it's NOT valid, throw an error
+// If a token is provided, and it's valid, grant access
+// Save the decodedToken and the User object, on the 
+// request body as req.decodedToken and req.userObj
 module.exports = (req, res, next) => {
     const token = req.headers.authorization;
     
