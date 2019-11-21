@@ -17,7 +17,7 @@ router.post("/register", checkIfUsernameIsTaken, (req, res) => {
         user.password = hashedPassword;
 
         Users.add(user)
-        .then(user => res.status(201).json({ user  }))
+        .then(user => res.status(201).json({ user, token }))
         .catch(err => res.status(500).json({ error: "The server encountered an error while registering the users." }));
     } else {
         res.status(400).json({
