@@ -86,16 +86,14 @@ async function findById(workout_id){
 // Find ALL workouts that exist
 function findAll(){
     return db('workouts')
+        .orderBy('id')
 };
 
 // Find ALL workouts associated with a user
 async function findUserWorkouts(user_id) {
     // Get all workouts associated with a user ID
     const workouts = await db('workouts as w')
-        .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
         .join('users as u', 'w.user_id', 'u.id')
-        .leftJoin('exercises as e', 'we.exercise_id', 'e.id')
-        .groupBy('w.name')
         .select(
             'w.id as workout_id',
             'w.name as workout_name',
