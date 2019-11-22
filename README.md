@@ -11,7 +11,6 @@
 - Express.js
 - Knex.js
 - PostgreSQL
-- JWT Authentication
 
 ## API Documentation
 **BASE URL** https://weight-lift-journal-dev.herokuapp.com/
