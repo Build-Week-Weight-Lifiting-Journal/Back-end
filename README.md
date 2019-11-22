@@ -2,9 +2,9 @@
 
 # Weight Lifting Journal - Back End
 
-Project Objective: The weight lifting journal aims to give the users the ability to track, and monitor, their progress in gym. Users can create an account, add workouts, and perform CRUD operations to view, add, edit, and delete exercises for each workout.
+**Project Objective:** The weight lifting journal aims to give the users the ability to track, and monitor, their progress in gym. Users can create an account, add workouts, and perform CRUD operations to view, add, edit, and delete exercises for each workout.
 
-Group Trello Board: https://trello.com/b/X4AIenFs/weight-lifting-project
+**Group Trello Board:** https://trello.com/b/X4AIenFs/weight-lifting-project
 
 ## API Documentation
 **BASE URL** https://weight-lift-journal-dev.herokuapp.com/
