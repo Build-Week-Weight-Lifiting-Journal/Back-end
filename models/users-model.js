@@ -19,14 +19,14 @@ function get() {
 // Get an individual user by ID
 async function getById(id) {
     let workouts = [];
-
+    
     // Retrieves the user by their ID
     const user = await db('users')
         .where({ id })
         .select('id', 'username', 'email', 'created_at', 'updated_at')
         .first();
 
-// Returns all workouts specific to that user if they exist
+        // Returns all workouts specific to that user if they exist
 if (user) {
     workouts = await db('workouts as w')
         .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')

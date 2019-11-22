@@ -9,10 +9,6 @@ module.exports = (user, path) => {
         errors.push('A password must be 8 or more characters long.')
     }
 
-    if (path === "/register") {
-        // Any input values specific to registration go here
-    }
-
     return {
         isSuccessful: !Boolean(errors.length),
         errors
