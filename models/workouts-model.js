@@ -59,7 +59,6 @@ async function findById(workout_id){
         .where({ id: workout_id })
         .first();
 
-        await console.log(workout)
     // Find the exercises associated with that workout 
     if (workout) {
         const exercises = await db('workouts_exercises as we')

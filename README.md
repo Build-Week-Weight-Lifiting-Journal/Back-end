@@ -21,6 +21,7 @@ Endpoints that **_DO_** require authentication (Protected):
 |<a href="#users">GET Users</a>                           | /api/users                                |
 |<a href="#userID">GET User By ID</a>                     | /api/users/:id                            |
 |<a href="#username">GET User By Username</a>          | /api/users/getby/:username                |
+|<a href="#userWithJWT">GET User Profile With JWT</a>                 | /api/users/profile                   |
 |<a href="#userWorkouts">GET User's workouts</a>                 | /api/users/:id/workouts                   |
 |<a href="#addWorkoutToUser">POST Add a workout to a user</a>      | /api/users/:id/workouts                   |
 |<a href="#allWorkouts">GET All workouts</a>                    | /api/workouts                             |
@@ -227,6 +228,48 @@ URL: https://weight-lift-journal-dev.herokuapp.com/api/users/getby/name/:usernam
 
 ### What will be returned:
 _An object of the user information._
+
+```js
+{
+  "id": 3,
+  "username": "testing",
+  "email": "testing@gmai.com",
+  "created_at": "2019-11-19 19:17:42",
+  "updated_at": "2019-11-19 19:17:42",
+  "workouts": [
+    {
+      "id": 7,
+      "workout_name": "Bodybuilding",
+      "exercises": 5
+    },
+    {
+      "id": 8,
+      "workout_name": "Powerlifting",
+      "exercises": 5
+    },
+    {
+      "id": 9,
+      "workout_name": "Regular Workout",
+      "exercises": 5
+    }
+  ]
+}
+```
+
+<hr />
+
+<div id="userWithJWT"></div>
+
+## [GET] User profile with JWT
+
+<a href="#top">Return to the top</a>
+
+URL: https://weight-lift-journal-dev.herokuapp.com/api/users/profile
+
+**NOTE:** This endpoint will provide you with the current user object. This only works as long as a JWT token is presented. The endpoint uses this JWT to justify which user is logged in.
+
+### What will be returned:
+_An object of the currently logged in user information._
 
 ```js
 {
