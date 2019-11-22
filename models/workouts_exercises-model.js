@@ -1,8 +1,17 @@
 const db = require("../config/db-config");
 
 module.exports = {
+    getById,
     editExercise,
     remove
+}
+
+// Find an exercise by it's ID that connects it to a workout
+// This is NOT the ID that is related to the general exercise name
+function getById(id) {
+    return db('workouts_exercises')
+        .where({ id })
+        .first();
 }
 
 // Edit an exercise that belongs to a workout

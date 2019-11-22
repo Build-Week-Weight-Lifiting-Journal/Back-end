@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Workouts = require('../models/workouts-model');
 const validateExercise = require("../middleware/validateExercise");
+const validateWorkoutId = require("../middleware/validateWorkoutId-middleware");
 
 // GET - all workouts
 router.get('/', (req, res) => {
@@ -43,7 +44,6 @@ router.post('/:id/exercises', (req, res) => {
                 res.status(201).json(workout);
             })
             .catch(err => {
-                console.log(err);
                 res.status(500).json({ error: "The server failed to add the exercise to the workout"})
             });
     } else {
@@ -56,7 +56,7 @@ router.post('/:id/exercises', (req, res) => {
 });
 
 // DELETE - delete a workout by ID
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateWorkoutId, (req, res) => {
     const { id } = req.params;
 
     Workouts.remove(id)
@@ -70,7 +70,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // PUT - edit a workout by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', validateWorkoutId, (req, res) => {
     const { id } = req.params;
     const changes = req.body;
 

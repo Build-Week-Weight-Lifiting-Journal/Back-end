@@ -36,7 +36,6 @@ if (user) {
         .groupBy('w.id')
         .count('e.id as exercises')
 
-        console.log("WORKOUTS HERE" , workouts)
             return await {
                 ...user,
                 workouts: workouts
