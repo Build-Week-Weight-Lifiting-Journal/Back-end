@@ -34,7 +34,6 @@ router.get("/getby/name/:username", validateUsername, async (req, res) => {
         res.status(200).json(req.user); 
     } 
     catch (err) { 
-        console.log(err)
         res.status(500).json({ error: "The server failed to retrieve that user." }); 
     };
 });
