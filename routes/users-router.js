@@ -2,10 +2,10 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 
 const Users = require("../models/users-model");
-const { jwtSecret } = require("../config/secrets-config");
 const Workouts = require("../models/workouts-model");
 const validateUserId = require("../middleware/validateUserId-middleware");
 const validateUsername = require("../middleware/validateUsername-middleware");
+const validateUserWorkouts = require("../middleware/validateUserWorkouts-middleware");
 
 // GET - all users
 router.get("/", async (req, res) => {
@@ -53,7 +53,7 @@ router.get("/:id/workouts", (req, res) => {
 });
 
 // POST - Add a workout to a user
-router.post('/:id/workouts', validateUserId, (req, res) => {
+router.post('/:id/workouts', validateUserId, validateUserWorkouts, (req, res) => {
     const workoutData = req.body;
     const { id } = req.params;
 

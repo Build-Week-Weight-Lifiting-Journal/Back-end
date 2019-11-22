@@ -6,7 +6,8 @@ module.exports = {
     findAll,
     findUserWorkouts,
     remove,
-    edit
+    edit,
+    test
 };
 
 // Add an exercise to a workout
@@ -140,4 +141,13 @@ function edit(changes, id) {
     return db('workouts')
             .where({id})
             .update(changes, 'id')
+}
+
+async function test(user_id) {
+    return db('workouts as w')
+        .leftJoin('workouts_exercises as we', 'we.workout_id', 'w.id')
+        .where({ user_id })
+        .select('w.name');
+
+
 }
