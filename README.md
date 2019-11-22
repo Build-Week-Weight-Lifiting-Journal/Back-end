@@ -5,6 +5,13 @@
 
 **Group Trello Board:** https://trello.com/b/X4AIenFs/weight-lifting-project
 
+**Technologies Used:**
+- Node.js
+- Express.js
+- Knex.js
+- PostgreSQL
+- JWT Authentication
+
 ## API Documentation
 **BASE URL** https://weight-lift-journal-dev.herokuapp.com/
 - Attach endpoints to the end of the base URL in order to make HTTP Requests.
